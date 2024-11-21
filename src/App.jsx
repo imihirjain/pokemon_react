@@ -1,5 +1,9 @@
 import { Pokemon } from "./Pokemon";
 
 export const App = () => {
-  return <Pokemon />;
+  return (
+    <div className="bg-[#eff3ff]">
+      <Pokemon />
+    </div>
+  );
 };

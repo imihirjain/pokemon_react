@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./index.css";
 import { PokemonCards } from "./PokemonCards";
 
 export const Pokemon = () => {
@@ -52,7 +51,7 @@ export const Pokemon = () => {
   if (loading) {
     return (
       <div>
-        <h1>Loading...</h1>
+        <h1 className="text-center text-4xl font-bold mt-12">Loading...</h1>
       </div>
     );
   }
@@ -60,26 +59,31 @@ export const Pokemon = () => {
   if (error) {
     return (
       <div>
-        <h1>{error.message}</h1>
+        <h1 className="text-center text-4xl font-bold mt-12">
+          {error.message}
+        </h1>
       </div>
     );
   }
 
   return (
-    <section className="container">
+    <section className=" mx-auto px-4 py-8 ">
       <header>
-        <h1>Lets Catch Pokémon</h1>
+        <h1 className="text-xl lg:text-5xl font-bold text-center mb-12">
+          Let's Catch Pokémon
+        </h1>
       </header>
-      <div className="pokemon-search">
+      <div className="flex justify-center mb-12">
         <input
           type="text"
           placeholder="Search Pokemon"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          className=" w-64 sm:w-[32rem] border-b-2 border-[#020d35] py-3 text-lg font-bold bg-[#e91e63] bg-opacity-20 rounded-tl-xl rounded-tr-xl"
         />
       </div>
       <div>
-        <ul className="cards">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {/* Display only the paginated items */}
           {currItem.map((currElem) => (
             <PokemonCards key={currElem.id} pokemonData={currElem} />
@@ -87,11 +91,15 @@ export const Pokemon = () => {
         </ul>
       </div>
       {/* Pagination Control */}
-      <div className="pagination">
+      <div className="flex justify-center mt-8 flex-wrap gap-5">
         {Array.from({ length: totalPage }, (_, index) => (
           <button
             key={index + 1}
-            className={`page-button ${page === index + 1 ? "active" : ""}`}
+            className={`px-4 py-2 mx-2 font-semibold text-lg rounded-lg transition-colors duration-200 ${
+              page === index + 1
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 hover:bg-green-300"
+            }`}
             onClick={() => handlePageChange(index + 1)}
           >
             {index + 1}
